@@ -1,76 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bakery Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sweet Box</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff8f0;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #fff8f0;
+}
 
-    header {
-      background: #ff8c42;
-      color: white;
-      padding: 20px;
-      font-size: 24px;
-    }
+header {
+  background: #ff6b6b;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+}
 
-    .hero {
-      padding: 40px;
-    }
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+}
 
-    .btn {
-      background: green;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      border-radius: 5px;
-    }
+.hero h1 {
+  font-size: 32px;
+}
 
-    .whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      color: white;
-      padding: 15px;
-      border-radius: 50%;
-      text-decoration: none;
-      font-size: 20px;
-    }
-  </style>
+.btn {
+  background: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.section {
+  padding: 30px;
+  text-align: center;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: white;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  text-decoration: none;
+}
+</style>
+
 </head>
 
 <body>
 
-<header>
-  🍰 My Bakery Website
-</header>
+<header>🍰 The Sweet Box</header>
 
 <div class="hero">
   <h1>Fresh Cakes & Desserts</h1>
-  <p>Order now and enjoy delicious treats!</p>
-
-  <button class="btn" onclick="alert('Order placed!')">
-    Order Now
-  </button>
+  <p>Delicious homemade bakery items</p>
 </div>
 
-<!-- WhatsApp Button -->
-<a 
-  href="https://wa.me/91XXXXXXXXXX" 
-  class="whatsapp" 
-  target="_blank"
->
-  💬
-</a>
+<div class="section">
+  <h2>Our Menu</h2>
+
+  <div class="products">
+
+    <div class="card">
+      <img src="https://source.unsplash.com/200x150/?cake" />
+      <h3>Chocolate Cake</h3>
+      <p>₹500</p>
+      <a href="https://wa.me/919460527300?text=I want Chocolate Cake">
+        <button class="btn">Order</button>
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="https://source.unsplash.com/200x150/?pastry" />
+      <h3>Strawberry Pastry</h3>
+      <p>₹120</p>
+      <a href="https://wa.me/919460527300?text=I want Strawberry Pastry">
+        <button class="btn">Order</button>
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="https://source.unsplash.com/200x150/?cookies" />
+      <h3>Cookies Box</h3>
+      <p>₹300</p>
+      <a href="https://wa.me/919460527300?text=I want Cookies">
+        <button class="btn">Order</button>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="section">
+  <h2>About Us</h2>
+  <p>We create fresh and delicious bakery items with love and quality ingredients.</p>
+</div>
+
+<div class="section">
+  <h2>Contact</h2>
+  <p>📞 9460527300</p>
+  <p>📍 Your City</p>
+</div>
+
+<a href="https://wa.me/919460527300" class="whatsapp">💬</a>
 
 </body>
 </html>
