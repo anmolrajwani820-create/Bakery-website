@@ -1,136 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Sweet Box</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Sugar Box</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #fff8f0;
-}
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-header {
-  background: #ff6b6b;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  font-size: 24px;
-}
-.hero {
-  text-align: center;
-  padding: 50px 20px;
-}
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-.hero h1 {
-  font-size: 32px;
-}
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
 
-.btn {
-  background: #25D366;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+    /* Chocolate drip animation */
+    .drip {
+      animation: drip 4s infinite ease-in-out;
+    }
+    @keyframes drip {
+      0%,100% { height: 60px; }
+      50% { height: 90px; }
+    }
 
-.section {
-  padding: 30px;
-  text-align: center;
-}
+    /* Card hover */
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+    }
 
-.products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.card {
-  background: white;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  width: 200px;
-}
-
-.card img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.whatsapp {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-  text-decoration: none;
-}
-</style>
-
+    /* Smooth transition */
+    .card {
+      transition: all 0.3s ease;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-[#FFF8F2] text-[#2D1B14] scroll-smooth">
 
-<header>🍰 The Sweet Box</header>
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full h-16 flex justify-between items-center px-6 backdrop-blur bg-white/70 z-50">
+    <h1 class="font-bold text-xl">🍫 The Sugar Box</h1>
 
-<div class="hero">
-  <h1>Fresh Cakes & Desserts</h1>
-  <p>Delicious homemade bakery items</p>
-</div>
-
-<div class="section">
-  <h2>Our Menu</h2>
-
-  <div class="products">
-
-    <div class="card">
-      <img src="https://source.unsplash.com/200x150/?cake" />
-      <h3>Chocolate Cake</h3>
-      <p>₹500</p>
-      <a href="https://wa.me/919460527300?text=I want Chocolate Cake">
-        <button class="btn">Order</button>
-      </a>
+    <div class="hidden md:flex gap-6 text-sm">
+      <a href="#">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
     </div>
 
-    <div class="card">
-      <img src="https://source.unsplash.com/200x150/?pastry" />
-      <h3>Strawberry Pastry</h3>
-      <p>₹120</p>
-      <a href="https://wa.me/919460527300?text=I want Strawberry Pastry">
-        <button class="btn">Order</button>
-      </a>
+    <button class="bg-[#5A3E36] hover:bg-[#C08A5D] text-white px-4 py-2 rounded-full transition">
+      Order Now
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative">
+
+    <!-- Chocolate drip -->
+    <div class="drip absolute top-0 left-0 w-full bg-gradient-to-b from-[#5A3E36] to-transparent"></div>
+
+    <span class="border px-4 py-1 rounded-full text-sm border-[#5A3E36]">
+      Freshly Baked Everyday
+    </span>
+
+    <h1 class="text-5xl md:text-7xl font-bold mt-6">
+      Indulge in Every Bite of Happiness
+    </h1>
+
+    <p class="mt-4 text-[#6B7280] max-w-xl">
+      Handcrafted brownies, cookies, and desserts made with love and the finest ingredients.
+    </p>
+
+    <div class="flex gap-4 mt-6">
+      <button class="bg-[#5A3E36] text-white px-6 py-3 rounded-full hover:bg-[#C08A5D] transition">
+        Explore Menu
+      </button>
+      <button class="border px-6 py-3 rounded-full">
+        Order Now
+      </button>
     </div>
 
-    <div class="card">
-      <img src="https://source.unsplash.com/200x150/?cookies" />
-      <h3>Cookies Box</h3>
-      <p>₹300</p>
-      <a href="https://wa.me/919460527300?text=I want Cookies">
-        <button class="btn">Order</button>
-      </a>
+    <p class="mt-6 text-sm text-[#6B7280]">
+      100% Fresh • Premium Ingredients • Same Day Delivery
+    </p>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="menu" class="px-6 mt-20">
+    <h2 class="text-3xl font-bold text-center mb-10">Our Menu</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- CARD -->
+      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c" class="h-48 w-full object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold">Chocolate Brownie</h3>
+          <p class="text-sm text-gray-500">₹250</p>
+          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e" class="h-48 w-full object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold">Choco Chip Cookies</h3>
+          <p class="text-sm text-gray-500">₹200</p>
+          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c" class="h-48 w-full object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold">Fudge Brownie</h3>
+          <p class="text-sm text-gray-500">₹300</p>
+          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587" class="h-48 w-full object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold">Dark Chocolate Cake</h3>
+          <p class="text-sm text-gray-500">₹350</p>
+          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35" class="h-48 w-full object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold">Stuffed Cookies</h3>
+          <p class="text-sm text-gray-500">₹250</p>
+          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa" class="h-48 w-full object-cover">
+        <div class="p-4">
+          <h3 class="font-semibold">Dessert Box</h3>
+          <p class="text-sm text-gray-500">₹400</p>
+          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
+            Order Now
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="about" class="py-24 text-center">
+    <h2 class="text-3xl font-bold mb-12">Why You'll Love Us</h2>
+
+    <div class="grid md:grid-cols-3 gap-10">
+      <p>🍰 Fresh Ingredients</p>
+      <p>❤️ Handmade</p>
+      <p>🚚 Fast Delivery</p>
+      <p>🍪 Custom Orders</p>
+      <p>⭐ Premium Quality</p>
+      <p>🛡 Hygienic Baking</p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="reviews" class="px-6">
+    <h2 class="text-3xl font-bold text-center mb-10">Reviews</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-2xl shadow">
+        ⭐⭐⭐⭐⭐
+        <p class="mt-2 text-sm text-gray-600">Best brownies ever!</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow">
+        ⭐⭐⭐⭐⭐
+        <p class="mt-2 text-sm text-gray-600">Super fresh & tasty!</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow">
+        ⭐⭐⭐⭐⭐
+        <p class="mt-2 text-sm text-gray-600">Loved the dessert box!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-24 px-6 text-center bg-[#FFF8F2]">
+    <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+
+    <div class="max-w-md mx-auto space-y-4">
+      <input placeholder="Name" class="w-full p-3 rounded-lg border">
+      <input placeholder="Email" class="w-full p-3 rounded-lg border">
+      <textarea placeholder="Message" class="w-full p-3 rounded-lg border"></textarea>
+
+      <button class="bg-[#5A3E36] text-white w-full py-3 rounded-full hover:bg-[#C08A5D]">
+        Place Order / Send Message
+      </button>
     </div>
 
-  </div>
-</div>
+    <p class="mt-6">
+      Follow us on Instagram:
+      <a href="https://instagram.com/inner_sphere" target="_blank" class="text-pink-500">
+        @inner_sphere
+      </a>
+    </p>
+  </section>
 
-<div class="section">
-  <h2>About Us</h2>
-  <p>We create fresh and delicious bakery items with love and quality ingredients.</p>
-</div>
+  <!-- FOOTER -->
+  <footer class="bg-white py-10 px-6 mt-10">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div>
+        <h4 class="font-semibold">Menu</h4>
+        <p>Brownies</p>
+        <p>Cookies</p>
+        <p>Cakes</p>
+      </div>
 
-<div class="section">
-  <h2>Contact</h2>
-  <p>📞 9460527300</p>
-  <p>📍 Your City</p>
-</div>
+      <div>
+        <h4 class="font-semibold">Quick Links</h4>
+        <p>Home</p>
+        <p>About</p>
+        <p>Contact</p>
+      </div>
 
-<a href="https://wa.me/919460527300" class="whatsapp">💬</a>
+      <div>
+        <h4 class="font-semibold">Social</h4>
+        <p>Instagram</p>
+      </div>
+    </div>
+
+    <p class="text-center mt-6 text-sm text-gray-500">
+      © 2026 The Sugar Box • Made with love & chocolate 🍫
+    </p>
+  </footer>
 
 </body>
 </html>
