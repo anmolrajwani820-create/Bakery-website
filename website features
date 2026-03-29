@@ -1,0 +1,32 @@
+<div style="padding:20px; border:1px solid #ddd; border-radius:10px; margin:20px 0;">
+
+  <h2>Order & Contact</h2>
+
+  <!-- Instagram -->
+  <p>
+    📸 Follow us on Instagram: 
+    <a href="https://instagram.com/your_username" target="_blank">
+      @your_username
+    </a>
+  </p>
+
+  <!-- Payment Options -->
+  <h3>Payment Options</h3>
+  <ul>
+    <li>UPI (Google Pay / PhonePe / Paytm)</li>
+    <li>Cash on Delivery (COD)</li>
+    <li>Bank Transfer</li>
+  </ul>
+
+  <!-- Shipping Charges -->
+  <h3>Shipping Charges</h3>
+  <p>₹50 (within city)</p>
+  <p>₹100 (outside city)</p>
+
+  <!-- Order Button -->
+  <button onclick="alert('Contact us on Instagram to place your order!')" 
+          style="padding:10px 20px; background:#ff7a7a; border:none; color:white; border-radius:5px;">
+    Order Now
+  </button>
+
+</div>
