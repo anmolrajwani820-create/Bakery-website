@@ -1,252 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
+ <!-- UPDATED: Advanced Order + Cart + Razorpay + Tracking + WhatsApp --><!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Sugar Box</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Sugar Box</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"><style>
+body { font-family: 'Poppins', sans-serif; }
+.card { transition: all 0.3s ease; }
+.card:hover { transform: translateY(-10px) scale(1.03); }
+</style></head><body class="bg-[#FFF8F2] text-[#2D1B14]"><!-- CART BUTTON --><div class="fixed bottom-5 right-5 z-50">
+  <button onclick="openCart()" class="bg-black text-white px-5 py-3 rounded-full">
+    🛒 Cart (<span id="cart-count">0</span>)
+  </button>
+</div><!-- CART MODAL --><div id="cartModal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center">
+  <div class="bg-white p-6 rounded-xl w-80">
+    <h2 class="text-xl font-bold mb-3">Your Cart</h2>
+    <ul id="cart-items" class="text-sm mb-4"></ul>
+    <p>Total: ₹<span id="total">0</span></p>
+    <button onclick="payNow()" class="bg-green-600 text-white w-full py-2 mt-3 rounded">Pay Now</button>
+    <button onclick="closeCart()" class="mt-2 w-full">Close</button>
+  </div>
+</div><!-- PRODUCTS --><div class="grid md:grid-cols-3 gap-6 p-6"><!-- PRODUCT --><div class="card bg-white p-4 rounded-xl shadow">
+  <h3>Chocolate Brownie</h3>
+  <p>₹250</p>
+  <button onclick="addToCart('Chocolate Brownie',250)" class="bg-brown-700 text-white px-3 py-2 rounded mt-2">Add to Cart</button>
+</div><div class="card bg-white p-4 rounded-xl shadow">
+  <h3>Choco Chip Cookies</h3>
+  <p>₹200</p>
+  <button onclick="addToCart('Choco Chip Cookies',200)" class="bg-brown-700 text-white px-3 py-2 rounded mt-2">Add to Cart</button>
+</div></div><script>
+let cart = [];
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+function addToCart(name, price){
+  cart.push({name, price});
+  updateCart();
+}
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+function updateCart(){
+  document.getElementById('cart-count').innerText = cart.length;
+  let list = document.getElementById('cart-items');
+  list.innerHTML = '';
+  let total = 0;
 
-  <style>
-    body { font-family: 'Poppins', sans-serif; }
+  cart.forEach(item => {
+    total += item.price;
+    list.innerHTML += `<li>${item.name} - ₹${item.price}</li>`;
+  });
 
-    /* Chocolate drip animation */
-    .drip {
-      animation: drip 4s infinite ease-in-out;
+  document.getElementById('total').innerText = total;
+}
+
+function openCart(){ document.getElementById('cartModal').classList.remove('hidden'); }
+function closeCart(){ document.getElementById('cartModal').classList.add('hidden'); }
+
+function payNow(){
+  let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  var options = {
+    "key": "YOUR_RAZORPAY_KEY",
+    "amount": total * 100,
+    "currency": "INR",
+    "name": "The Sugar Box",
+    "description": "Order Payment",
+    "handler": function (response){
+      alert("Payment Successful! Order ID: " + response.razorpay_payment_id);
+      sendWhatsApp(total);
     }
-    @keyframes drip {
-      0%,100% { height: 60px; }
-      50% { height: 90px; }
-    }
+  };
 
-    /* Card hover */
-    .card:hover {
-      transform: translateY(-10px) scale(1.03);
-    }
+  var rzp = new Razorpay(options);
+  rzp.open();
+}
 
-    /* Smooth transition */
-    .card {
-      transition: all 0.3s ease;
-    }
-  </style>
-</head>
+function sendWhatsApp(total){
+  let message = "New Order:%0A";
+  cart.forEach(item => {
+    message += item.name + " - ₹" + item.price + "%0A";
+  });
+  message += "Total: ₹" + total;
 
-<body class="bg-[#FFF8F2] text-[#2D1B14] scroll-smooth">
+  window.open(`https://wa.me/919460527300?text=${message}`);
+}
 
-  <!-- NAVBAR -->
-  <nav class="fixed top-0 w-full h-16 flex justify-between items-center px-6 backdrop-blur bg-white/70 z-50">
-    <h1 class="font-bold text-xl">🍫 The Sugar Box</h1>
-
-    <div class="hidden md:flex gap-6 text-sm">
-      <a href="#">Home</a>
-      <a href="#menu">Menu</a>
-      <a href="#about">About</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <button class="bg-[#5A3E36] hover:bg-[#C08A5D] text-white px-4 py-2 rounded-full transition">
-      Order Now
-    </button>
-  </nav>
-
-  <!-- HERO -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative">
-
-    <!-- Chocolate drip -->
-    <div class="drip absolute top-0 left-0 w-full bg-gradient-to-b from-[#5A3E36] to-transparent"></div>
-
-    <span class="border px-4 py-1 rounded-full text-sm border-[#5A3E36]">
-      Freshly Baked Everyday
-    </span>
-
-    <h1 class="text-5xl md:text-7xl font-bold mt-6">
-      Indulge in Every Bite of Happiness
-    </h1>
-
-    <p class="mt-4 text-[#6B7280] max-w-xl">
-      Handcrafted brownies, cookies, and desserts made with love and the finest ingredients.
-    </p>
-
-    <div class="flex gap-4 mt-6">
-      <button class="bg-[#5A3E36] text-white px-6 py-3 rounded-full hover:bg-[#C08A5D] transition">
-        Explore Menu
-      </button>
-      <button class="border px-6 py-3 rounded-full">
-        Order Now
-      </button>
-    </div>
-
-    <p class="mt-6 text-sm text-[#6B7280]">
-      100% Fresh • Premium Ingredients • Same Day Delivery
-    </p>
-  </section>
-
-  <!-- PRODUCTS -->
-  <section id="menu" class="px-6 mt-20">
-    <h2 class="text-3xl font-bold text-center mb-10">Our Menu</h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <!-- CARD -->
-      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c" class="h-48 w-full object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold">Chocolate Brownie</h3>
-          <p class="text-sm text-gray-500">₹250</p>
-          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e" class="h-48 w-full object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold">Choco Chip Cookies</h3>
-          <p class="text-sm text-gray-500">₹200</p>
-          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c" class="h-48 w-full object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold">Fudge Brownie</h3>
-          <p class="text-sm text-gray-500">₹300</p>
-          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587" class="h-48 w-full object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold">Dark Chocolate Cake</h3>
-          <p class="text-sm text-gray-500">₹350</p>
-          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35" class="h-48 w-full object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold">Stuffed Cookies</h3>
-          <p class="text-sm text-gray-500">₹250</p>
-          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
-            Order Now
-          </button>
-        </div>
-      </div>
-
-      <div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1587248720327-8eb72564be1e" class="h-48 w-full object-cover"> class="h-48 w-full object-cover">
-        <div class="p-4">
-          <h3 class="font-semibold">Dessert Box</h3>
-          <p class="text-sm text-gray-500">₹400</p>
-          <button class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full hover:bg-[#C08A5D]">
-            Order Now
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- WHY US -->
-  <section id="about" class="py-24 text-center">
-    <h2 class="text-3xl font-bold mb-12">Why You'll Love Us</h2>
-
-    <div class="grid md:grid-cols-3 gap-10">
-      <p>🍰 Fresh Ingredients</p>
-      <p>❤️ Handmade</p>
-      <p>🚚 Fast Delivery</p>
-      <p>🍪 Custom Orders</p>
-      <p>⭐ Premium Quality</p>
-      <p>🛡 Hygienic Baking</p>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section id="reviews" class="px-6">
-    <h2 class="text-3xl font-bold text-center mb-10">Reviews</h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white p-6 rounded-2xl shadow">
-        ⭐⭐⭐⭐⭐
-        <p class="mt-2 text-sm text-gray-600">Best brownies ever!</p>
-      </div>
-
-      <div class="bg-white p-6 rounded-2xl shadow">
-        ⭐⭐⭐⭐⭐
-        <p class="mt-2 text-sm text-gray-600">Super fresh & tasty!</p>
-      </div>
-
-      <div class="bg-white p-6 rounded-2xl shadow">
-        ⭐⭐⭐⭐⭐
-        <p class="mt-2 text-sm text-gray-600">Loved the dessert box!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="py-24 px-6 text-center bg-[#FFF8F2]">
-    <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
-
-    <div class="max-w-md mx-auto space-y-4">
-      <input placeholder="Name" class="w-full p-3 rounded-lg border">
-      <input placeholder="Email" class="w-full p-3 rounded-lg border">
-      <textarea placeholder="Message" class="w-full p-3 rounded-lg border"></textarea>
-
-      <button class="bg-[#5A3E36] text-white w-full py-3 rounded-full hover:bg-[#C08A5D]">
-        Place Order / Send Message
-      </button>
-    </div>
-
-    <p class="mt-6">
-      Follow us on Instagram:
-      <a href="https://www.instagram.com/my_inner_sphere?igsh=bXQ0anloZngzNmJm" target="_blank" class="text-pink-500 font-semibold">
-  @my_inner_sphere
-</a>
-    </p>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-white py-10 px-6 mt-10">
-    <div class="grid md:grid-cols-3 gap-6">
-      <div>
-        <h4 class="font-semibold">Menu</h4>
-        <p>Brownies</p>
-        <p>Cookies</p>
-        <p>Cakes</p>
-      </div>
-
-      <div>
-        <h4 class="font-semibold">Quick Links</h4>
-        <p>Home</p>
-        <p>About</p>
-        <p>Contact</p>
-      </div>
-
-      <div>
-        <h4 class="font-semibold">Social</h4>
-        <p>Instagram</p>
-      </div>
-    </div>
-
-    <p class="text-center mt-6 text-sm text-gray-500">
-      © 2026 The Sugar Box • Made with love & chocolate 🍫
-    </p>
-  </footer>
-
-</body>
+</script><!-- ORDER TRACKING --><div class="p-6 text-center">
+  <h2 class="text-xl font-bold">Track Your Order</h2>
+  <input id="orderId" placeholder="Enter Order ID" class="border p-2 mt-2">
+  <button onclick="trackOrder()" class="bg-black text-white px-4 py-2 ml-2">Track</button>
+  <p id="status" class="mt-3"></p>
+</div><script>
+function trackOrder(){
+  let id = document.getElementById('orderId').value;
+  document.getElementById('status').innerText = "Order " + id + " is being prepared 🍰";
+}
+</script></body>
 </html>
