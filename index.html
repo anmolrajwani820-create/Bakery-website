@@ -1,175 +1,125 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Sugar Box</title>  <script src="https://cdn.tailwindcss.com"></script>  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">  <style>
-    body { font-family: 'Poppins', sans-serif; }
-
-    .drip { animation: drip 4s infinite ease-in-out; }
-    @keyframes drip {
-      0%,100% { height: 60px; }
-      50% { height: 90px; }
-    }
-
-    .card:hover { transform: translateY(-10px) scale(1.03); }
-    .card { transition: all 0.3s ease; }
-  </style></head><body class="bg-[#FFF8F2] text-[#2D1B14] scroll-smooth"><!-- NAVBAR --><nav class="fixed top-0 w-full h-16 flex justify-between items-center px-6 backdrop-blur bg-white/70 z-50">
-  <h1 class="font-bold text-xl">🍫 The Sugar Box</h1>  <div class="hidden md:flex gap-6 text-sm">
-    <a href="#">Home</a>
-    <a href="#menu">Menu</a>
-    <a href="#about">About</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#contact">Contact</a>
-  </div>  <button onclick="openCart()" class="bg-[#5A3E36] text-white px-4 py-2 rounded-full">
-    🛒 (<span id="cart-count">0</span>)
-  </button>
-</nav><!-- HERO --><section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative">  <div class="drip absolute top-0 left-0 w-full bg-gradient-to-b from-[#5A3E36] to-transparent"></div>  <span class="border px-4 py-1 rounded-full text-sm border-[#5A3E36]">
-    Freshly Baked Everyday
-  </span>  <h1 class="text-5xl md:text-7xl font-bold mt-6">
-    Indulge in Every Bite of Happiness
-  </h1>  <p class="mt-4 text-[#6B7280] max-w-xl">
-    Handcrafted brownies, cookies, and desserts made with love.
-  </p>  <div class="flex gap-4 mt-6">
-    <button onclick="scrollToMenu()" class="bg-[#5A3E36] text-white px-6 py-3 rounded-full">
-      Explore Menu
-    </button>
-    <button onclick="openCart()" class="border px-6 py-3 rounded-full">
-      Order Now
-    </button>
-  </div>
-</section><!-- PRODUCTS --><section id="menu" class="px-6 mt-20">
-  <h2 class="text-3xl font-bold text-center mb-10">Our Menu</h2>  <div class="grid md:grid-cols-3 gap-6"><!-- PRODUCT CARD TEMPLATE -->
-<script>
-  const products = [
-    {name:"Chocolate Brownie",price:250},
-    {name:"Choco Chip Cookies",price:200},
-    {name:"Fudge Brownie",price:300},
-    {name:"Dark Chocolate Cake",price:350},
-    {name:"Stuffed Cookies",price:250},
-    {name:"Dessert Box",price:400}
-  ];
-</script>
-
-<!-- CARDS -->
-<div class="card bg-white rounded-2xl shadow-lg p-4">
-  <h3>Chocolate Brownie</h3>
-  <p>₹250</p>
-  <button onclick="addToCart('Chocolate Brownie',250)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Sugar Box - Pro</title><script src="https://cdn.tailwindcss.com"></script><script src="https://checkout.razorpay.com/v1/checkout.js"></script><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"><style>
+body { font-family: 'Poppins', sans-serif; }
+.card:hover { transform: translateY(-10px) scale(1.03); }
+.card { transition: all 0.3s ease; }
+</style></head><body class="bg-[#FFF8F2] text-[#2D1B14] scroll-smooth"><!-- NAVBAR --><nav class="fixed top-0 w-full h-16 flex justify-between items-center px-6 backdrop-blur bg-white/70 z-50">
+<h1 class="font-bold text-xl">🍫 The Sugar Box</h1>
+<button onclick="openCart()" class="bg-[#5A3E36] text-white px-4 py-2 rounded-full">
+🛒 (<span id="cart-count">0</span>)
+</button>
+</nav><!-- PRODUCTS --><section class="px-6 mt-24">
+<h2 class="text-3xl font-bold text-center mb-10">Our Menu</h2><div class="grid md:grid-cols-3 gap-6"><!-- PRODUCT --><div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c" class="h-40 w-full object-cover">
+<img src="https://images.unsplash.com/photo-1599785209796-786432b228bc" class="h-40 w-full object-cover">
+<div class="p-4">
+<h3>Chocolate Brownie</h3>
+<p>₹250</p>
+<button onclick="addToCart('Chocolate Brownie',250)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
 </div>
-
-<div class="card bg-white rounded-2xl shadow-lg p-4">
-  <h3>Choco Chip Cookies</h3>
-  <p>₹200</p>
-  <button onclick="addToCart('Choco Chip Cookies',200)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
+</div><div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e" class="h-40 w-full object-cover">
+<img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35" class="h-40 w-full object-cover">
+<div class="p-4">
+<h3>Choco Chip Cookies</h3>
+<p>₹200</p>
+<button onclick="addToCart('Choco Chip Cookies',200)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
 </div>
-
-<div class="card bg-white rounded-2xl shadow-lg p-4">
-  <h3>Fudge Brownie</h3>
-  <p>₹300</p>
-  <button onclick="addToCart('Fudge Brownie',300)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
+</div><div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587" class="h-40 w-full object-cover">
+<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b" class="h-40 w-full object-cover">
+<div class="p-4">
+<h3>Fudge Brownie</h3>
+<p>₹300</p>
+<button onclick="addToCart('Fudge Brownie',300)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
 </div>
-
-<div class="card bg-white rounded-2xl shadow-lg p-4">
-  <h3>Dark Chocolate Cake</h3>
-  <p>₹350</p>
-  <button onclick="addToCart('Dark Chocolate Cake',350)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
+</div><div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35" class="h-40 w-full object-cover">
+<img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb" class="h-40 w-full object-cover">
+<div class="p-4">
+<h3>Dark Chocolate Cake</h3>
+<p>₹350</p>
+<button onclick="addToCart('Dark Chocolate Cake',350)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
 </div>
-
-<div class="card bg-white rounded-2xl shadow-lg p-4">
-  <h3>Stuffed Cookies</h3>
-  <p>₹250</p>
-  <button onclick="addToCart('Stuffed Cookies',250)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
+</div><div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1587248720327-8eb72564be1e" class="h-40 w-full object-cover">
+<img src="https://images.unsplash.com/photo-1505253716362-afaea6c3d1af" class="h-40 w-full object-cover">
+<div class="p-4">
+<h3>Stuffed Cookies</h3>
+<p>₹250</p>
+<button onclick="addToCart('Stuffed Cookies',250)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
 </div>
-
-<div class="card bg-white rounded-2xl shadow-lg p-4">
-  <h3>Dessert Box</h3>
-  <p>₹400</p>
-  <button onclick="addToCart('Dessert Box',400)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
+</div><div class="card bg-white rounded-2xl shadow-lg overflow-hidden">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" class="h-40 w-full object-cover">
+<img src="https://images.unsplash.com/photo-1542826438-8bde4f1c8f41" class="h-40 w-full object-cover">
+<div class="p-4">
+<h3>Dessert Box</h3>
+<p>₹400</p>
+<button onclick="addToCart('Dessert Box',400)" class="w-full mt-2 bg-[#5A3E36] text-white py-2 rounded-full">Add to Cart</button>
 </div>
-
-  </div>
-</section><!-- CART MODAL --><div id="cartModal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center">
-  <div class="bg-white p-6 rounded-xl w-80">
-    <h2 class="text-xl font-bold mb-3">Your Cart</h2>
-    <ul id="cart-items"></ul>
-    <p>Total: ₹<span id="total">0</span></p>
-    <button onclick="payNow()" class="bg-green-600 text-white w-full py-2 mt-3 rounded">Pay Now</button>
-    <button onclick="closeCart()" class="mt-2 w-full">Close</button>
-  </div>
-</div><!-- CONTACT --><section id="contact" class="py-24 px-6 text-center">
-  <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
-  <p>WhatsApp: 9460527300</p>
-  <p>
-    Instagram:
-    <a href="https://www.instagram.com/my_inner_sphere" target="_blank" class="text-pink-500 font-semibold">
-      @my_inner_sphere
-    </a>
-  </p>
-</section><!-- TRACKING --><div class="p-6 text-center">
-  <h2 class="text-xl font-bold">Track Your Order</h2>
-  <input id="orderId" class="border p-2 mt-2" placeholder="Order ID">
-  <button onclick="trackOrder()" class="bg-black text-white px-4 py-2 ml-2">Track</button>
-  <p id="status" class="mt-3"></p>
+</div></div>
+</section><!-- CART --><div id="cartModal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center">
+<div class="bg-white p-6 rounded-xl w-80">
+<h2 class="text-xl font-bold mb-3">Your Cart</h2>
+<ul id="cart-items"></ul>
+<p>Total: ₹<span id="total">0</span></p>
+<button onclick="payNow()" class="bg-green-600 text-white w-full py-2 mt-3 rounded">Pay Now</button>
+<button onclick="closeCart()" class="mt-2 w-full">Close</button>
+</div>
 </div><script>
 let cart = [];
 
 function addToCart(name, price){
-  cart.push({name, price});
-  updateCart();
+cart.push({name, price});
+updateCart();
 }
 
 function updateCart(){
-  document.getElementById('cart-count').innerText = cart.length;
-  let list = document.getElementById('cart-items');
-  list.innerHTML = '';
-  let total = 0;
+document.getElementById('cart-count').innerText = cart.length;
+let list = document.getElementById('cart-items');
+list.innerHTML = '';
+let total = 0;
 
-  cart.forEach(item => {
-    total += item.price;
-    list.innerHTML += `<li>${item.name} - ₹${item.price}</li>`;
-  });
+cart.forEach(item => {
+total += item.price;
+list.innerHTML += `<li>${item.name} - ₹${item.price}</li>`;
+});
 
-  document.getElementById('total').innerText = total;
+document.getElementById('total').innerText = total;
 }
 
 function openCart(){ document.getElementById('cartModal').classList.remove('hidden'); }
 function closeCart(){ document.getElementById('cartModal').classList.add('hidden'); }
 
 function payNow(){
-  let total = cart.reduce((sum, item) => sum + item.price, 0);
+let total = cart.reduce((sum, item) => sum + item.price, 0);
 
-  var options = {
-    key: "YOUR_RAZORPAY_KEY",
-    amount: total * 100,
-    currency: "INR",
-    name: "The Sugar Box",
-    handler: function (response){
-      alert("Payment Successful: " + response.razorpay_payment_id);
-      sendWhatsApp(total);
-    }
-  };
+var options = {
+key: "YOUR_RAZORPAY_KEY",
+amount: total * 100,
+currency: "INR",
+name: "The Sugar Box",
+handler: function (response){
+alert("Payment Successful: " + response.razorpay_payment_id);
+sendWhatsApp(total);
+}
+};
 
-  var rzp = new Razorpay(options);
-  rzp.open();
+var rzp = new Razorpay(options);
+rzp.open();
 }
 
 function sendWhatsApp(total){
-  let message = "New Order:%0A";
-  cart.forEach(item => {
-    message += item.name + " - ₹" + item.price + "%0A";
-  });
-  message += "Total: ₹" + total;
+let message = "New Order:%0A";
+cart.forEach(item => {
+message += item.name + " - ₹" + item.price + "%0A";
+});
+message += "Total: ₹" + total;
 
-  window.open(`https://wa.me/919460527300?text=${message}`);
-}
-
-function trackOrder(){
-  let id = document.getElementById('orderId').value;
-  document.getElementById('status').innerText = "Order " + id + " is being prepared 🍰";
-}
-
-function scrollToMenu(){
-  document.getElementById('menu').scrollIntoView({behavior:'smooth'});
+window.open(`https://wa.me/919460527300?text=${message}`);
 }
 </script></body>
 </html>
